@@ -6,6 +6,7 @@ const rewardPhase3startDecayNumerator=98884n;
 const rewardPhase3startDecayDenominator=100000n;
 
 const rewardPhase4startHeight=12993200;
+const rewardPhase4startSubsidy=51300043026n*COIN/100000000n;
 const rewardPhase4startDecayNumerator=98652n;
 const rewardPhase4startDecayDenominator=100000n;
 
@@ -41,7 +42,10 @@ while (supply<maxSupply) {
     height++;
     if (height>=rewardPhase4startHeight) {
         //phase 4
-        if ((height-rewardPhase4startHeight)%175200===0) {
+        if (height===rewardPhase4startHeight) {
+            reward=rewardPhase4startSubsidy;
+            save=true;
+        } else if ((height-rewardPhase4startHeight)%175200===0) {
             //new reward height
             reward*=rewardPhase4startDecayNumerator;
             reward/=rewardPhase4startDecayDenominator;
